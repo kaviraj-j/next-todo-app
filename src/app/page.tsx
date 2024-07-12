@@ -5,8 +5,6 @@ import AddTodo from './components/AddTodo';
 
 
 export default function Home() {
-  console.log(todos)
-
   return (
     <main className="">
         <div className='m-4 p-4'>
