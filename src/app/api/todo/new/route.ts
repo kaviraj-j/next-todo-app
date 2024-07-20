@@ -1,6 +1,4 @@
 import { TodoType } from "@/configs/datatypes";
-import { randomUUID } from "crypto";
-import { readFile, writeFile } from "fs/promises";
 const todoJsonFilePath = "src/app/utils/todo.json"
 
 
@@ -10,16 +8,7 @@ export async function POST(req: NextRequest) {
     const request = await req.json()
     try {
         const todo: TodoType = request.todo
-        todo.id = randomUUID()
-        const todoJsonFile: any = await readFile(todoJsonFilePath)
-        const todoData = await JSON.parse(todoJsonFile)
-        todoData.push(todo)
-        await writeFile(todoJsonFilePath, JSON.stringify(todoData))
-        return NextResponse.json({
-            type: "success",
-            message: "New ToDo created successfully",
-            todoUid: todo.id
-        })
+        todo.id = "id" + Math.random().toString(16).slice(2)
     } catch (err) {
         console.log(err)
     }
