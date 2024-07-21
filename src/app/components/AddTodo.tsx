@@ -75,6 +75,7 @@ const AddTodo: React.FC<AddTodoProps> = ({ setTodos, session, newTodoInputRef })
                     value={newTodo} 
                     onChange={handleChange}
                     ref={newTodoInputRef}
+                    // maxLength={50}
                 />
                 <button 
                     className='bg-blue-500 text-white px-2 py-0.5 m-3 rounded hover:bg-blue-600 ml-6 font-bold' 

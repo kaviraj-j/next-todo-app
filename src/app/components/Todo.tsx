@@ -77,13 +77,23 @@ const TodoComponent: React.FC<TodoProps> = ({ todo, session, todos, setTodos }) 
         "bg-gray-300 hover:bg-gray-400": isCompleted
       }
     )}>
-      <input onChange={clickHandler} checked={isCompleted} type="checkbox" value="" className="m-2 w-4 h-4 text-blue-600 bg-gray-1000 border-gray-300 rounde dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600" />
-      <h2 className={clsx('', {
+      <input 
+        onChange={clickHandler} 
+        checked={isCompleted} 
+        type="checkbox" 
+        value="" 
+        className="m-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600" 
+      />
+      <h2 className={clsx("flex-grow m-2 overflow-hidden text-ellipsis whitespace-nowrap min-w-0", {
         "line-through": isCompleted
       })}>{todo.title}</h2>
-      <button onClick={handleDelete} className='ml-3'><Image src={TrashIcon} alt='trash-icon' /></button>
+      <button onClick={handleDelete} className="ml-3 p-2 text-white rounded flex-shrink-0">
+        <Image src={TrashIcon} alt="trash-icon" />
+      </button>
     </div>
   );
+  
+  
 };
 
 export default TodoComponent;

@@ -4,7 +4,7 @@ import { TodoType } from "@/configs/datatypes";
 import AddTodo from './components/AddTodo';
 import { useState, useEffect, useRef } from 'react';
 import { getTodos } from './utils/localStorage';
-import Loading from './components/loading';
+import Loading from './components/Loading';
 
 export default function Home() {
   const [todos, setTodos] = useState<TodoType[]>([]);
@@ -59,7 +59,7 @@ export default function Home() {
       <div className='m-4 p-4'>
         <AddTodo setTodos={setTodos} session={session} newTodoInputRef={newTodoInputRef} />
       </div>
-      <div className="grid grid-cols-2 p-4 m-4 sm:grid-cols-1 md:grid-cols-2">
+      <div className="grid p-4 m-4 grid-cols-1 md:grid-cols-2">
         {isLoading ? (
           <Loading />
         ) : !todos.length ? (
