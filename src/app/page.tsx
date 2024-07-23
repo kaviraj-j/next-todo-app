@@ -1,16 +1,43 @@
 "use client";
-import Todo from './components/Todo';
+
+// Auth
+import { getUserId } from "./auth";
+
+// Datatypes
 import { TodoType } from "@/configs/datatypes";
+
+// Components
+import Todo from './components/Todo';
 import AddTodo from './components/AddTodo';
-import { useState, useEffect, useRef } from 'react';
-import { getTodos } from './utils/localStorage';
 import Loading from './components/Loading';
 
+// Client Hooks
+import { useState, useEffect, useRef } from 'react';
+
+// Functions
+import { getTodos } from './utils/localStorage';
+ 
 export default function Home() {
+
   const [todos, setTodos] = useState<TodoType[]>([]);
   const [session, setSession] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const newTodoInputRef = useRef<HTMLInputElement>(null)
+
+  const [userId, setUserId] = useState<string>("")
+
+  useEffect(() => {
+      getUserId().then(res => {
+        if(res) {
+          console.log(res)
+          setUserId(res)
+        }
+      })
+      .catch((e) => {
+        console.log(e)
+      })   
+    
+  }, [])
 
   const getTodosFromServer = async () => {
     try {
@@ -42,6 +69,8 @@ export default function Home() {
     const fetchTodos = async () => {
       setIsLoading(true);
       if (session) {
+        // const user = await currentUser()
+        // console.log(user)
         const todosFromServer = await getTodosFromServer();
         setTodos(todosFromServer || []);
       } else {
